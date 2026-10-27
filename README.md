@@ -7,7 +7,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-PG17-3ecf8e?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 [![PayMongo](https://img.shields.io/badge/Payments-PayMongo-00c853?style=for-the-badge)](https://paymongo.com/)
 
-An enterprise multi-tenant operations platform engineered for modern automotive detailing studios. Built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Supabase PostgreSQL 17**, KleenTech coordinates high-throughput vehicle detailing through real-time bay allocation, 5-role role-based access control (RBAC), an automated 5-step customer booking wizard, and a touch-optimized cashier POS ledger.
+A Multi-branch operations platform designed for automotive detailing business. Built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Supabase PostgreSQL 17**, KleenTech coordinates automotive detailing workflows through real-time bay allocation, 5-role role-based access control (RBAC), an automated 5-step customer booking wizard, and a touch-optimized cashier POS ledger.
 
 > [!NOTE]
 > **Architecture Showcase:** This repository contains the public case study, system architecture documentation, and visual showcase assets for the KleenTech platform. The underlying core production implementation is maintained in a private enterprise repository.
@@ -15,14 +15,14 @@ An enterprise multi-tenant operations platform engineered for modern automotive 
 ---
 
 ## 🌐 Live Deployment
-- **Production Web Application:** [https://kleentechcapstone.vercel.app/](https://kleentechcapstone.vercel.app/)
+- **Preview Deployment:** [https://kleentechcapstone.vercel.app/](https://kleentechcapstone.vercel.app/)
 - **Infrastructure:** Vercel Global Edge Network with client-side SPA routing and Supabase PostgreSQL 17 backend.
 
 ---
 
 ## 📸 System Visual Tour
 
-### 1. Customer Experience & Booking Lifecycle
+### 1. Customer Experience & Booking Lifecycle (In Progress)
 Modern, mobile-responsive portal providing frictionless appointment scheduling, vehicle registration, and transparent pricing across vehicle tiers.
 
 | Landing & Precision Detailing | 5-Step Smart Booking Wizard |
@@ -35,7 +35,7 @@ Modern, mobile-responsive portal providing frictionless appointment scheduling, 
 
 ---
 
-### 2. Front Desk Command & POS Cashier
+### 2. Front Desk Command & POS Cashier (In Progress)
 Real-time operations hub for receptionists to monitor physical detailing bays, coordinate vehicle arrivals, and settle counter balances.
 
 | Real-Time Detailing Bay Grid (Dark Mode) | POS Cashier & Terminal (Light Mode) |
@@ -60,7 +60,7 @@ Operational command center for branch managers to allocate weekly staff shifts, 
 
 ---
 
-### 5. Executive Governance & Financial Audit
+### 5. Executive Governance & Financial Audit (In progress)
 Super-admin control plane offering unified cross-branch visibility into financial transactions, staff assignments, and audit logs.
 
 ![Global Financial Ledger](docs/screenshots/screenshot_super-admin.png)
@@ -106,7 +106,7 @@ graph TD
 - **PostgreSQL 17 Row-Level Security (RLS):** Every table in `public` has RLS enabled with `(SELECT auth.uid())` statement caching to prevent cross-tenant data leakage.
 - **Privilege Escalation Triggers:** `BEFORE UPDATE` database triggers prevent client-side alteration of sensitive columns (`role`, `branch_id`, financial totals, and transaction states).
 - **Payment Signature Verification:** PayMongo webhooks verify cryptographic `Paymongo-Signature` via Web Crypto API **HMAC-SHA256** inside Deno Edge Functions before updating order states.
-- **Race Condition Prevention:** Detailing bay scheduling enforces row locking (`FOR UPDATE`) inside atomic `SECURITY DEFINER` stored procedures to eliminate simultaneous double-booking.
+- **Race Condition Prevention:** Detailing bay scheduling enforces row locking (`FOR UPDATE`) inside atomic `SECURITY DEFINER` stored procedures to prevent conflicting bay reservations through database-level locking.
 
 ---
 
