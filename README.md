@@ -7,7 +7,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-PG17-3ecf8e?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 [![PayMongo](https://img.shields.io/badge/Payments-PayMongo-00c853?style=for-the-badge)](https://paymongo.com/)
 
-A Multi-branch operations platform designed for automotive detailing business. Built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Supabase PostgreSQL 17**, KleenTech coordinates automotive detailing workflows through real-time bay allocation, 5-role role-based access control (RBAC), an automated 5-step customer booking wizard, and a touch-optimized cashier POS ledger.
+A Multi-branch operations platform designed for an automotive detailing business. Built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Supabase PostgreSQL 17**, KleenTech coordinates automotive detailing workflows through real-time bay allocation, role-based access control (RBAC) for five authenticated roles, an automated 5-step customer booking wizard, and a touch-optimized cashier POS ledger.
 
 > [!NOTE]
 > **Architecture Showcase:** This repository contains the public case study, system architecture documentation, and visual showcase assets for the KleenTech platform. The underlying core production implementation is maintained in a private repository.
