@@ -10,7 +10,7 @@
 A Multi-branch operations platform designed for automotive detailing business. Built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Supabase PostgreSQL 17**, KleenTech coordinates automotive detailing workflows through real-time bay allocation, 5-role role-based access control (RBAC), an automated 5-step customer booking wizard, and a touch-optimized cashier POS ledger.
 
 > [!NOTE]
-> **Architecture Showcase:** This repository contains the public case study, system architecture documentation, and visual showcase assets for the KleenTech platform. The underlying core production implementation is maintained in a private enterprise repository.
+> **Architecture Showcase:** This repository contains the public case study, system architecture documentation, and visual showcase assets for the KleenTech platform. The underlying core production implementation is maintained in a private repository.
 
 ---
 
