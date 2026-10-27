@@ -119,7 +119,7 @@ graph TD
 | **Build & Bundler** | Vite 8 | Instant HMR and optimized production treeshaking. |
 | **Backend & Database** | Supabase (PostgreSQL 17 + PostgREST) | Serverless data persistence, Realtime WebSocket sync, and Auth. |
 | **Edge Functions** | Deno TypeScript Functions | Webhook processing, PayMongo payment intents, and Web Push. |
-| **Quality & E2E** | Vitest + Playwright + GitHub Actions | Automated CI/CD static verification, unit tests, and multi-role testing. |
+| **Quality & E2E** | Vitest + Playwright + GitHub Actions | Unit tests, and multi-role testing. |
 | **Hosting** | Vercel Edge Network | Low-latency global static asset delivery and SPA rewrites. |
 
 ---
