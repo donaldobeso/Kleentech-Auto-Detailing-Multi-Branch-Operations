@@ -1,7 +1,5 @@
 /**
- * KleenTech Auto Detailing — Multi-Branch Domain Models
- * Public TypeScript specifications illustrating the implemented baseline and
- * the active Milestone M1–M6 roadmap contracts.
+ * Example file of typescript. For github language detector only.
  */
 
 export type UserRole =
