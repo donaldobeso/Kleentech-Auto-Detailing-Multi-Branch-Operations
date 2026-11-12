@@ -8,7 +8,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-PG17-3ecf8e?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 [![PayMongo](https://img.shields.io/badge/Payments-PayMongo-00c853?style=for-the-badge)](https://paymongo.com/)
 
-A multi-branch operations platform designed for an automotive detailing business operating across 4 physical branches in the Philippines (*Main Office Cebu*, *Avenir Cebu*, *BYD Alabang*, and *BYD Las Piñas*). Built with **React 19.2**, **TypeScript 6**, **Vite 8**, **Tailwind CSS v4**, **Supabase PostgreSQL 17**, and **PayMongo**, KleenTech coordinates automotive detailing workflows through real-time bay allocation, role-based access control (RBAC) for five authenticated roles, an automated 5-step customer booking wizard, and a touch-optimized cashier POS ledger.
+A multi-branch operations platform designed for an automotive detailing business operating across 4 physical branches in the Philippines. Built with **React 19.2**, **TypeScript 6**, **Vite 8**, **Tailwind CSS v4**, **Supabase PostgreSQL 17**, and **PayMongo**, KleenTech coordinates automotive detailing workflows through real-time bay allocation, role-based access control (RBAC) for five authenticated roles, an automated 5-step customer booking wizard, and a cashier POS ledger.
 
 > [!NOTE]
 > **Architecture Showcase:** This repository contains the public case study, system architecture documentation, TypeScript domain contracts (`types/domain.ts`), and visual showcase assets for the KleenTech platform. The underlying core production implementation is maintained in a private repository.
@@ -59,11 +59,11 @@ The platform implements 7 integrated operational domains across all 4 branches a
 ### 1. Customer Experience & Booking Lifecycle (In Progress)
 Mobile-responsive portal providing appointment scheduling, vehicle registration, and transparent pricing across vehicle tiers.
 
-| Landing & Precision Detailing | 5-Step Smart Booking Wizard |
+| Landing Page | 5-Step Booking Wizard |
 | :---: | :---: |
 | ![Landing Page](docs/screenshots/screenshot_customer-landing-page.png) | ![Booking Wizard](docs/screenshots/screenshot_customer_booking-form.png) |
 
-| Live Appointment Tracking & History | Tiered VIP Memberships |
+| Live Appointment Tracking & History | Tiered Memberships |
 | :---: | :---: |
 | ![Appointments](docs/screenshots/screenshot_customer-appointment.png) | ![Memberships](docs/screenshots/screenshot_customer_membership.png) |
 
@@ -72,7 +72,7 @@ Mobile-responsive portal providing appointment scheduling, vehicle registration,
 ### 2. Front Desk Command & POS Cashier (In Progress)
 Real-time operations hub for receptionists to monitor physical detailing bays, coordinate vehicle arrivals, and settle counter balances.
 
-| Real-Time Detailing Bay Grid (Dark Mode) | POS Cashier & Terminal (Light Mode) |
+| Detailing Bay Grid (Dark Mode) | POS Cashier (Light Mode) |
 | :---: | :---: |
 | ![Bay Grid Dark](docs/screenshots/screenshot_receptionist_darkmode.png) | ![POS Light](docs/screenshots/screenshot_receptionist_lightmode.png) |
 
@@ -81,7 +81,7 @@ Real-time operations hub for receptionists to monitor physical detailing bays, c
 ### 3. Technician Station (Bay Terminal & Mobile Queue)
 Dedicated interface engineered for automotive detailers on the service floor. Features real-time vehicle intake queue, bay standby timers, pre-flight equipment checklists, and quality assurance sign-offs.
 
-| Station Detailing Bay Terminal | Mobile Field Floor Experience |
+| Station Bay Terminal | Mobile Queue Interface |
 | :---: | :---: |
 | ![Technician Station](docs/screenshots/screenshot_technician.png) | ![Technician Mobile](docs/screenshots/screenshot_technician-mobile.png) |
 
@@ -90,14 +90,14 @@ Dedicated interface engineered for automotive detailers on the service floor. Fe
 ### 4. Branch Operations & Workforce Management
 Operational command center for branch managers to allocate weekly staff shifts, adjust vehicle-tier price matrices, and monitor daily bay capacity across detailers.
 
-![Workforce Allocation & Shift Matrix](docs/screenshots/screenshot_branch-manager.png)
+![Shift Schedule Matrix](docs/screenshots/screenshot_branch-manager.png)
 
 ---
 
 ### 5. Executive Governance & Financial Audit (In Progress)
 Super-admin control plane offering unified cross-branch visibility into financial transactions, staff assignments, and audit logs.
 
-![Global Financial Ledger](docs/screenshots/screenshot_super-admin.png)
+![Financial Ledger](docs/screenshots/screenshot_super-admin.png)
 
 ---
 
