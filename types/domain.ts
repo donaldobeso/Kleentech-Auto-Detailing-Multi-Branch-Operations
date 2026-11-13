@@ -17,9 +17,14 @@ export type CustomerSegment =
   | 'guest_walkin';
 
 /**
- * 5-Tier Vehicle Classification (Milestone M1 adds 'motorcycle' at ₱100 deposit & 0.6x duration)
+ * 5-Tier Vehicle Classification (Implemented: 'motorcycle' ₱100/0.6x through 'truck_heavy' ₱500/1.8x)
  */
-export type VehicleType = 'motorcycle' | 'sedan' | 'suv' | 'van' | 'truck';
+export type VehicleType =
+  | 'motorcycle'
+  | 'sedan_hatchback'
+  | 'suv_crossover_pickup'
+  | 'van_minibus'
+  | 'truck_heavy';
 
 export interface UserProfile {
   id: string;

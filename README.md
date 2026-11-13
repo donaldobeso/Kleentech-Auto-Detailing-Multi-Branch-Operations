@@ -23,16 +23,16 @@ A multi-branch operations platform designed for an automotive detailing business
 
 ## ⚙️ Implemented Core Business Logic & Operational Capabilities
 
-The platform implements 7 integrated operational domains across all 4 branches and 9 detailing, protection, and restoration services:
+The platform implements 7 integrated operational domains across all 4 branches and 10 detailing, protection, and restoration services:
 
 1. **Sales, Online Booking & Point of Sale (POS):**
-   - **5-Step Multi-Service Booking Wizard:** Customers bundle 1 to 4 services per appointment (`Signature Carwash`, `Interior & Exterior Detailing`, `9H Ceramic Coating`, `Paint Protection Film (PPF)`, `Body Repair & Repaint`, `Nano-Ceramic Window Tint`, `Cabin Leather Reupholstery`, `Underbody Bitumen Rustproofing`, and `Paintless Dent Repair`).
-   - **Registered & Passwordless Guest Checkout:** Supports authenticated garage owners and unauthenticated guests (protected by Cloudflare Turnstile and SHA-256 capability tracking links).
-   - **Vehicle-Tier Pricing & Reservation Deposits:** Computes dynamic `[price_min, price_max]` estimates, duration multipliers (`1.0x` to `1.5x`), and reservation fees (`₱150` to `₱500`) by vehicle tier (`Sedan`, `SUV`, `Van`, `Truck`).
+   - **5-Step Multi-Service Booking Wizard:** Customers bundle 1 to 4 services per appointment (`Carwash`, `Exterior Detailing`, `Interior Detailing`, `9H Ceramic Coating`, `Paint Protection Film (PPF)`, `Body Repair & Repaint`, `Nano-Ceramic Window Tint`, `Cabin Leather Reupholstery`, `Underbody Bitumen Rustproofing`, and `Paintless Dent Repair`), automatically filtering out car-only packages (`Window Tint`, `Leather Reupholstery`, `Rustproofing`) for motorcycles.
+   - **Registered & Passwordless Guest Checkout:** Supports authenticated garage owners and unauthenticated guests (with configurable Cloudflare Turnstile verification and SHA-256 capability tracking links).
+   - **5-Tier Vehicle Pricing, Durations & Reservation Deposits:** Computes dynamic `[price_min, price_max]` estimates, duration multipliers (`0.6x` to `1.8x`), and reservation fees (`₱100` to `₱500`) across 5 canonical vehicle tiers (`Motorcycle`, `Sedan / Hatchback`, `SUV / Crossover / Pickup`, `Van / Minibus`, `Long Truck / Heavy`).
    - **Walk-In Registration & Cashier POS:** Front-desk walk-in intake (immediate bay roll-in or scheduled slot), post-inspection final price adjustments, over-the-counter settlement (Cash, Card Terminal, QRPh), online PayMongo checkout (GCash, Maya, GrabPay, QRPh, Card), and printable digital/thermal receipts.
    - **3-Tier Sliding Cancellation & Automated Refunds:** Calculates refund tiers based on notice before the appointment (`> 24h: 100% full refund`, `6–24h: 50% partial refund`, `< 6h: 0% forfeited`) and dispatches refunds via PayMongo.
 2. **Operations & Shop Floor Scheduling:**
-   - **Multi-Branch Physical Bay Management:** Tracks live bay states (`available`, `occupied`, `maintenance`) synchronized automatically with active booking transitions.
+   - **Multi-Branch Physical Bay Management:** Manages physical detailing bays (`active`, `maintenance`, `inactive`) with real-time bay occupancy synchronized from active booking allocations and tier-scaled busy-slot estimation (`0.6x`–`1.8x`).
    - **Dual-Gate Capacity Intake Engine:** Evaluates **Gate A (Hourly Drop-Off Pacing)** against on-duty technician shifts and lunch windows, and **Gate B (Daily Branch Intake Cap, `1..100`)** under database row locks to prevent shop-floor bottlenecks.
    - **Geolocation Branch Discovery & Live Queues:** Sorts branches by Haversine distance with interactive Leaflet map previews and monitors arriving and waiting lounge queues in real time.
 3. **Workforce Dispatch & Bay Execution:**
@@ -45,9 +45,9 @@ The platform implements 7 integrated operational domains across all 4 branches a
    - **5 Distinct Role Portals:** Dedicated interfaces and permission boundaries for **Customers**, **Receptionists**, **Technicians**, **Branch Managers**, and **Super Admins**.
    - **Shift Templates & Leave Approvals:** Manages weekly technician shift templates, date-specific schedule overrides, daily branch shop-floor routines, technician service specializations, and leave/shift-change requests.
 6. **CRM, Club Subscriptions & Strike Governance:**
-   - **Customer Vehicle Garage:** Stores customer vehicles with uploaded photos and normalized license plate deduplication.
-   - **Tiered Club Plans & Quota Balances:** Super Admin-configured recurring 30-day plans with custom pricing, perks, and monthly service session quotas.
-   - **2-Strike No-Show & Pardon Appeals:** Tracks customer no-shows, locks `Pay at Branch` privileges at 2 strikes, and allows customers to submit pardon appeals for Branch Manager review.
+   - **Customer Vehicle Garage:** Stores customer vehicles with uploaded photos, normalized license plate deduplication, and tier-compatibility guards.
+   - **Tiered Club Plans & Expiry Consistency:** Super Admin-configured recurring 30-day plans with custom pricing, perks, monthly service session quotas, and automated overdue period expiry.
+   - **2-Strike No-Show & Pardon Appeals:** Tracks customer no-shows, locks `Pay at Branch` privileges at 2 strikes, and allows receptionists to submit pardon appeals for Branch Manager or Super Admin review.
 7. **Finance, Notifications & Compliance:**
    - **Dual-Channel Real-Time Notifications:** Dispatches 15 operational event notifications across in-app Supabase Realtime WebSocket feeds and background Web Push VAPID browser/mobile notifications.
    - **Financial Ledgers & Security Controls:** Provides branch and cross-branch payment ledgers, immutable system audit logs (`audit_logs`), WebAuthn Passkey authentication, 5-attempt login lockout protection, and staff IP whitelisting.
@@ -145,8 +145,8 @@ graph TD
 ---
 
 ## 🚧 Active Roadmap Enhancements (In Progress)
-On top of the implemented production baseline above, the following enhancements are currently in progress:
-1. **5th Vehicle Tier (`Motorcycle`) & Service Compatibility:** Adding a dedicated `Motorcycle` tier (`₱100` reservation deposit, `0.6x` duration multiplier) and filtering out car-only services (*Window Tint*, *Leather Reupholstery*, *Underbody Rustproofing*).
+Following completion of the 5-tier vehicle & motorcycle compatibility baseline, upcoming roadmap milestones include:
+1. **Mobile UI/UX & Shop-Floor Ergonomics Overhaul *(Next Priority)*:** Mobile-first (`360px`–`430px`) overhaul across the Customer booking wizard, vehicle garage, and self-service portal alongside Technician shop-floor queue, checklist, and schedule ergonomics.
 2. **Membership Terminology & Split-Tender Quota Engine:** Standardizing UI terminology from *Subscription* to **Membership**, adding per-service monthly quota progress meters, and supporting Split-Tender checkout when a member bundles covered services with paid add-ons.
 3. **Account Lifecycle & 3-Segment CRM:** Automatically merging prior guest/walk-in bookings and deduplicating vehicles when a customer verifies their email, enforcing soft-delete PII anonymization to protect historical payment ledgers, and segmenting CRM into `Active Members`, `Registered Clients`, and `Guests & Walk-Ins` with a 3-tab Customer 360° profile view.
 4. **3-Stage Document Pipeline & Technician Job Order Sync:** Evolving `/customer/receipt/:id` across **Stage 1: Job Order (`JO-#`) -> Stage 2: Billing Statement (`INV-#`, with online balance payment & QR/email sharing) -> Stage 3: Official Receipt (`OR-#`)**, adding a printable physical Job Order slip, and syncing multi-service bundles and customer special instructions to the Technician Job Order Queue.
