@@ -8,7 +8,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-PG17-3ecf8e?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 [![PayMongo](https://img.shields.io/badge/Payments-PayMongo-00c853?style=for-the-badge)](https://paymongo.com/)
 
-Multi-branch automotive detailing operations platform initially deployed for a 4-branch Philippine business and configurable to add, edit, or delete branches through Super Admin controls. Built with **React 19.2**, **TypeScript 6**, **Vite 8**, **Tailwind CSS v4**, **Supabase PostgreSQL 17**, and **PayMongo**, it coordinates automotive detailing workflows through real-time bay allocation, role-based access control (RBAC) across five authenticated roles, a 5-step customer booking wizard, technician shop-floor execution queues, and a cashier POS ledger.
+A multi-branch automotive detailing operations platform initially built for a 4-branch business and configurable to add, edit, or delete branches through Super Admin controls. Built with **React 19.2**, **TypeScript 6**, **Vite 8**, **Tailwind CSS v4**, **Supabase PostgreSQL 17**, and **PayMongo**, KleenTech coordinates automotive detailing workflows through real-time bay allocation, role-based access control (RBAC) across five authenticated roles, a 5-step customer booking wizard, technician shop-floor execution queues, and a cashier POS ledger.
 
 > [!NOTE]
 > **Architecture Showcase:** This public repository contains system documentation, implemented TypeScript domain contracts (`types/domain.ts`), and visual captures of the KleenTech platform. Application source code is maintained in a separate private repository.
