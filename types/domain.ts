@@ -1,23 +1,12 @@
 /**
- * Example file of typescript. For github language detector only.
+ * Public TypeScript domain contracts reflecting implemented KleenTech data structures.
  */
 
-export type UserRole =
-  | 'super_admin'
-  | 'manager'
-  | 'receptionist'
-  | 'technician'
-  | 'customer';
-
-export type AccountStatus = 'active' | 'suspended' | 'deleted';
-
-export type CustomerSegment =
-  | 'active_member'
-  | 'registered_client'
-  | 'guest_walkin';
+export type StaffRole = 'receptionist' | 'technician' | 'manager' | 'super_admin';
+export type UserRole = 'customer' | StaffRole;
 
 /**
- * 5-Tier Vehicle Classification (Implemented: 'motorcycle' ₱100/0.6x through 'truck_heavy' ₱500/1.8x)
+ * 5-Tier Vehicle Classification ('motorcycle' ₱100 / 0.6x through 'truck_heavy' ₱500 / 1.8x)
  */
 export type VehicleType =
   | 'motorcycle'
@@ -28,25 +17,19 @@ export type VehicleType =
 
 export interface UserProfile {
   id: string;
-  email: string | null;
-  full_name: string | null;
-  phone_number: string | null;
+  employee_id: string;
+  full_name: string;
+  email?: string | null;
+  phone_number?: string;
+  avatar_url?: string | null;
   role: UserRole;
   branch_id: string | null;
-  status: AccountStatus;
-  is_placeholder: boolean;
-  must_change_password: boolean;
-  no_show_count: number;
-  avatar_url: string | null;
-  terms_accepted_at?: string | null;
-  privacy_accepted_at?: string | null;
-  deleted_at?: string | null;
+  is_active: boolean;
   created_at: string;
-  updated_at: string;
 }
 
 export type BayType = 'general' | 'wash' | 'ceramic' | 'tint' | 'detailing';
-export type BayStatus = 'available' | 'occupied' | 'maintenance';
+export type BayStatus = 'active' | 'maintenance' | 'inactive';
 
 export interface DetailingBay {
   id: string;
@@ -55,99 +38,133 @@ export interface DetailingBay {
   name: string;
   bay_type: BayType;
   status: BayStatus;
-  notes?: string | null;
+  maintenance_reason?: string | null;
+  created_at: string;
+  updated_at: string;
+  branch?: {
+    id: string;
+    name: string;
+  };
+}
+
+export interface MasterService {
+  id: string;
+  name: string;
+  description: string;
+  estimated_duration_minutes: number;
+  image_url: string | null;
+  applicable_vehicle_types?: VehicleType[];
+  tier_duration_multipliers?: Record<string, number> | null;
+  created_at: string;
+}
+
+export interface CustomerVehicle {
+  id: string;
+  user_id: string;
+  make: string;
+  model: string;
+  plate_number: string;
+  color?: string | null;
+  year?: string | null;
+  vehicle_type?: VehicleType | string | null;
 }
 
 export type BookingStatus =
-  | 'pending_payment'
   | 'pending'
+  | 'pending_payment'
   | 'confirmed'
   | 'waiting'
   | 'in_progress'
   | 'completed'
-  | 'cancelled'
-  | 'no_show';
-
-/**
- * 3-Stage Document Transformation Pipeline (Milestone M4 — In Progress)
- * Stage 1: JOB_ORDER (JO-#XXXXXXXX) -> Stage 2: BILLING_STATEMENT (INV-#XXXXXXXX) -> Stage 3: OFFICIAL_RECEIPT (OR-#XXXXXXXX)
- */
-export type DocumentStage =
-  | 'JOB_ORDER'
-  | 'BILLING_STATEMENT'
-  | 'OFFICIAL_RECEIPT';
+  | 'cancelled';
 
 export interface BookingServiceItem {
-  id: string;
-  booking_id: string;
   service_id: string;
-  service_name: string;
   price_min: number;
   price_max: number;
-  final_price: number | null;
-  estimated_duration_minutes: number;
-  covered_by_subscription: boolean;
-  sort_order: number;
+  final_price?: number | null;
+  service?: {
+    name: string;
+    description?: string;
+    image_url?: string;
+    estimated_duration_minutes?: number;
+    applicable_vehicle_types?: VehicleType[];
+    tier_duration_multipliers?: Record<string, number> | null;
+  };
 }
 
 export interface BookingTechnicianCrewMember {
-  booking_id: string;
   technician_id: string;
-  full_name: string;
   is_lead: boolean;
   allocated_minutes: number;
 }
 
 export interface CustomerBooking {
   id: string;
-  customer_id: string;
-  vehicle_id: string | null;
-  branch_id: string;
-  technician_id: string | null;
-  bay_number: number | null;
   scheduled_at: string;
-  started_at: string | null;
-  completed_at: string | null;
+  booked_at?: string | null;
   status: BookingStatus;
-  document_stage: DocumentStage;
-  total_amount: number;
-  reservation_fee: number;
-  downpayment_amount: number;
-  payment_method: 'online' | 'branch' | 'subscription' | 'walk_in';
-  payment_type: 'full_upfront' | 'reservation_fee' | 'subscription' | 'branch';
-  checklist_state: boolean[];
-  notes: string | null;
-  technician_notes: string | null;
-  before_image_url: string | null;
-  after_image_url: string | null;
-  waiver_accepted_at?: string;
-  services: BookingServiceItem[];
-  crew: BookingTechnicianCrewMember[];
-  vehicle: {
+  notes?: string;
+  payment_method?: string;
+  payment_type?: string;
+  reservation_fee?: number;
+  total_amount?: number;
+  downpayment_amount?: number;
+  downpayment_paid_at?: string | null;
+  cancellation_deadline?: string | null;
+  is_refundable?: boolean;
+  checklist_state?: boolean[] | null;
+  technician_notes?: string;
+  branch_id?: string;
+  technician_id?: string;
+  customer_id?: string;
+  vehicles?: {
     make: string;
     model: string;
-    year: number;
-    color: string;
     plate_number: string;
-    vehicle_type: VehicleType;
+    color?: string;
+    year?: number;
+    vehicle_type?: VehicleType | string | null;
   };
+  booking_services?: BookingServiceItem[];
+  booking_technicians?: BookingTechnicianCrewMember[];
 }
 
-export interface MembershipPlan {
+export interface SubscriptionPlanService {
+  service_id: string;
+  service_quota: number | null;
+  service: { name: string };
+}
+
+export interface PlanPerkItem {
+  id: string;
+  label: string;
+  is_coming_soon: boolean;
+  sort_order: number;
+}
+
+export interface SubscriptionPlanConfig {
   id: string;
   name: string;
   slug: string;
-  tagline: string;
   price: number;
   sessions_limit: number | null;
-  eligible_vehicle_types: VehicleType[];
-  covered_services: Array<{
-    service_id: string;
-    service_name: string;
-    service_quota: number | null;
-  }>;
-  perks: Array<{
-    label: string;
-    is_coming_soon: boolean;
-  }>;
+  tagline: string;
+  is_active: boolean;
+  sort_order: number;
+  color_theme?: string;
+  icon?: string;
+  services: SubscriptionPlanService[];
+  perks: PlanPerkItem[];
 }
+
+export interface CustomerSubscription {
+  plan: string;
+  status: string;
+  sessions_used: number;
+  sessions_limit: number | null;
+  current_period_end?: string | null;
+}
+
+export type POSPaymentMethod = 'cash' | 'card' | 'ewallet';
+export type NotificationChannel = 'in_app' | 'web_push';
