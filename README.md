@@ -8,7 +8,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-PG17-3ecf8e?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 [![PayMongo](https://img.shields.io/badge/Payments-PayMongo-00c853?style=for-the-badge)](https://paymongo.com/)
 
-Multi-branch automotive detailing operations platform built for 4 branches in the Philippines using **React 19.2**, **TypeScript 6**, **Vite 8**, **Tailwind CSS v4**, **Supabase PostgreSQL 17**, and **PayMongo**. Coordinates automotive detailing workflows through real-time bay allocation, role-based access control (RBAC) across five authenticated roles, a 5-step customer booking wizard, technician shop-floor execution queues, and a cashier POS ledger.
+Multi-branch automotive detailing operations platform initially deployed for a 4-branch Philippine business and configurable to add, edit, or delete branches through Super Admin controls. Built with **React 19.2**, **TypeScript 6**, **Vite 8**, **Tailwind CSS v4**, **Supabase PostgreSQL 17**, and **PayMongo**, it coordinates automotive detailing workflows through real-time bay allocation, role-based access control (RBAC) across five authenticated roles, a 5-step customer booking wizard, technician shop-floor execution queues, and a cashier POS ledger.
 
 > [!NOTE]
 > **Architecture Showcase:** This public repository contains system documentation, implemented TypeScript domain contracts (`types/domain.ts`), and visual captures of the KleenTech platform. Application source code is maintained in a separate private repository.
@@ -23,7 +23,7 @@ Multi-branch automotive detailing operations platform built for 4 branches in th
 
 ## ⚙️ Implemented Operational Capabilities
 
-The platform implements 8 functional areas across 4 branches and 10 detailing, protection, and restoration services:
+The platform implements 8 functional areas with configurable multi-branch expansion and removal (currently 4 configured branches) alongside 10 detailing, protection, and restoration services:
 
 1. **Sales, Online Booking & Point of Sale (POS):**
    - **5-Step Multi-Service Booking Wizard:** Customers bundle 1 to 4 services per appointment (`Carwash`, `Exterior Detailing`, `Interior Detailing`, `9H Ceramic Coating`, `Paint Protection Film (PPF)`, `Body Repair & Repaint`, `Nano-Ceramic Window Tint`, `Cabin Leather Reupholstery`, `Underbody Bitumen Rustproofing`, and `Paintless Dent Repair`), filtering out car-only packages (`Window Tint`, `Leather Reupholstery`, `Rustproofing`) for motorcycles.
@@ -38,8 +38,8 @@ The platform implements 8 functional areas across 4 branches and 10 detailing, p
 3. **Workforce Dispatch & Bay Execution:**
    - **Multi-Technician Crew Allocation:** Branch Managers assign 1 Lead Technician and optional Co-Technicians to a bay, splitting allocated minutes across the crew.
    - **Interactive QA Checklists & Photo Proof:** Technicians track job steps with undo/redo support, capture Before & After inspection photos (`capture="environment"` on mobile devices), record bay notes, and flag stalls/delays to front-desk staff.
-4. **Multi-Branch Isolation & Price Governance:**
-   - **Branch-Level Data Isolation:** Houses all 4 branches in one database while restricting Managers, Receptionists, and Technicians to their assigned branch.
+4. **Multi-Branch Administration, Isolation & Price Governance:**
+   - **Dynamic Branch Management & Isolation:** Houses all branches in one shared database—allowing Super Admins to add, update, or remove branches—while restricting Managers, Receptionists, and Technicians to their assigned branch.
    - **Localized Price Approval Workflows:** Branch Managers submit tier-specific service price proposals reviewed by Super Admins with automated audit logging.
 5. **Workforce & Shift Scheduling (HR):**
    - **5 Role Portals:** Separate application views and PostgreSQL RLS boundaries for **Customers**, **Receptionists**, **Technicians**, **Branch Managers**, and **Super Admins**.
